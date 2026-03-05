@@ -16,62 +16,62 @@ If you have any questions, please feel free to contact the authors.
 
 # Pipeline & Scripts
 
-01-Preprocess.py: Image band combination
+01-Preprocess.py: Image band combination.
 
     Input: Data/DataSet (Original satellite images).
     Output: Data/DataSet_BandCombine (Satellite images with FAI).
 
-02-preprocess_train.py: Crop training patches
+02-preprocess_train.py: Crop training patches.
 
-    Input: Data/DataSet_BandCombine, Data/DataSet_BandCombine_Label (Label)
-    Output: Data/DataSet_BandCombine_Train/Img_SampleSet (Image patches), Data/DataSet_BandCombine_Train/Lab_SampleSet (Label patches)
+    Input: Data/DataSet_BandCombine, Data/DataSet_BandCombine_Label (Label).
+    Output: Data/DataSet_BandCombine_Train/Img_SampleSet (Image patches), Data/DataSet_BandCombine_Train/Lab_SampleSet (Label patches).
 
-03-Del_background.py: Filter green tide samples
+03-Del_background.py: Filter green tide samples.
 
-    Input:  Data/DataSet_BandCombine_Train/Img_SampleSet, Data/DataSet_BandCombine_Train/Lab_SampleSet
-    Output: Data/DataSet_BandCombine_Train/Img_SampleSet_DelBackground (Green-tide-containing image patches), Data/DataSet_BandCombine_Train/Lab_SampleSet_DelBackground (Green-tide-containing label  patches)
+    Input:  Data/DataSet_BandCombine_Train/Img_SampleSet, Data/DataSet_BandCombine_Train/Lab_SampleSet.
+    Output: Data/DataSet_BandCombine_Train/Img_SampleSet_DelBackground (Green-tide-containing image patches), Data/DataSet_BandCombine_Train/Lab_SampleSet_DelBackground (Green-tide-containing label  patches).
 
-04-main.py: Train model
+04-main.py: Train model.
 
-    Input: Data/DataSet_BandCombine_Train/Img_SampleSet_DelBackground, Data/DataSet_BandCombine_Train/Lab_SampleSet_DelBackground
-    Output: logs/CANet.h5 (Final model)
+    Input: Data/DataSet_BandCombine_Train/Img_SampleSet_DelBackground, Data/DataSet_BandCombine_Train/Lab_SampleSet_DelBackground.
+    Output: logs/CANet.h5 (Final model).
 
-05-main-test-overlap.py: Test model
+05-main-test-overlap.py: Test model.
 
-    Input: Data/DataSet_BandCombine_Test (Satellite images with FAI for testing)
-    Output: Data/DataSet_BandCombine_Test_Result (Test results)
+    Input: Data/DataSet_BandCombine_Test (Satellite images with FAI for testing).
+    Output: Data/DataSet_BandCombine_Test_Result (Test results).
     Using: logs/CANet.h5
 
-06-Image_Filter.py: Remove strip noise
+06-Image_Filter.py: Remove strip noise.
 
-    Input: Data/DataSet_BandCombine_Test_Result 
-    Output: Data/DataSet_BandCombine_Test_Result_Filter (Denoised results)
+    Input: Data/DataSet_BandCombine_Test_Result.
+    Output: Data/DataSet_BandCombine_Test_Result_Filter (Denoised results).
 
-07-Reprocess_Unmixing.py: Pixel unmixing
+07-Reprocess_Unmixing.py: Pixel unmixing.
 
-    Input: Data/DataSet_BandCombine_Test, Data/DataSet_BandCombine_Test_Result_Filter
-    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing (Sub-pixel abundance maps)
+    Input: Data/DataSet_BandCombine_Test, Data/DataSet_BandCombine_Test_Result_Filter.
+    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing (Sub-pixel abundance maps).
 
-08-SpatialSample.py: Resampled to a consistent spatial resolution
+08-SpatialSample.py: Resampled to a consistent spatial resolution.
 
-    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing
-    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample (Resampling results)
+    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing.
+    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample (Resampling results).
 
-09-Image_Alignment.py: Consistent Image Dimensions
+09-Image_Alignment.py: Consistent Image Dimensions.
 
-    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample, Data/Tar_zeros.tif (Standardized Structured Data)
-    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment (Consistent image dimensions)
+    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample, Data/Tar_zeros.tif (Standardized Structured Data).
+    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment (Consistent image dimensions).
 
-10-Img_Com_Week_4km.py, 10-Img_Com_Month_4km.py, 10-Img_Com_Year_4km.py: Multi-scale Temporal Image Compositing
+10-Img_Com_Week_4km.py, 10-Img_Com_Month_4km.py, 10-Img_Com_Year_4km.py: Multi-scale Temporal Image Compositing.
     There is no specific order; the code can be executed according to the requirements of the Image composition.
 
-    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment
-    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment_Composition (Image composition results)
+    Input: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment.
+    Output: Data/DataSet_BandCombine_Test_Result_Filter_Unmixing_Sample_Alignment_Composition (Image composition results).
 
-model.py: Model architecture
+model.py: Model architecture.
 
-read_gdal.py: GDAL image I/O
+read_gdal.py: GDAL image I/O.
 
-logs/CANet.h5: Trained Model
+logs/CANet.h5: Trained Model.
 
-Data/Tar_zeros.tif: Standardized Data Format for Dataset Generation
+Data/Tar_zeros.tif: Standardized Data Format for Dataset Generation.
