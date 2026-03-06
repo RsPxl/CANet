@@ -75,3 +75,11 @@ read_gdal.py: GDAL image I/O.
 logs/CANet.h5: Trained Model.
 
 Data/Tar_zeros.tif: Standardized Data Format for Dataset Generation.
+
+# License
+
+This dataset is released under the Creative Commons CC0 1.0 Universal (CC0 1.0) Public Domain Dedication.
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
+The data can be freely used, modified, and distributed without restriction.
